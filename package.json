@@ -1,0 +1,27 @@
+{
+  "name": "chat-room",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yunguang/chat-room.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yunguang/chat-room/issues"
+  },
+  "homepage": "https://github.com/yunguang/chat-room#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "socket-io": "^1.0.0",
+    "socket.io": "^2.0.4"
+  }
+}

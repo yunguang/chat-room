@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>聊天室</title>
+  <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+  <div class="container">
+    <div class="panel-default">
+      <div class="panel-heading">
+        欢迎来到聊天室
+      </div>
+      <div class="panel-body">
+        <ul class="list-group" id="content">
+        </ul>
+      </div>
+      <div >
+        <div class="col-xs-9">
+          <input type="text" class="form-control" id="msg">
+        </div>
+        <div class="col-xs-3">
+          <button class="btn btn-primary" id="sendBtn">发言</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+  <script src="jquery.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    let socket=io();
+    let username;
+    let isFirst=true;
+    function append(msg){
+      if(msg.user==username){
+        $("#content").append("<li class='list-group-item' style='text-align:right;'>"+msg.user+"："+msg.content+"</li>");
+      }else{
+        $("#content").append("<li class='list-group-item'>"+msg.user+"："+msg.content+"</li>");
+      }
+      
+    }
+    $("#sendBtn").on("click",function(){
+      let val=$("#msg").val();
+      socket.emit('message',{user:"系统",content:val});
+      $("#msg").val("");
+      if(isFirst){
+        isFirst=false;
+        username=val;
+      }
+      
+    })
+    socket.on('connect',function(){
+      append({user:"系统",content:"欢迎来到聊天室"});
+    })
+    socket.on('message',function(msg){
+      append(msg);
+    })
+  </script>
+</html>
